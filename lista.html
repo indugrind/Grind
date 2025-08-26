@@ -3,59 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Lista de Presença</title>
-    <link rel="icon" type="image/svg+xml" sizes="any" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314B8A6'/%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' d='M25 50 l20 20 l35 -35'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314B8A6'/%3E%3Cpath fill='none' stroke='%23FFF' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' d='M25 50 l20 20 l35 -35'/%3E%3C/svg%3E">
+    <title>InduGrind | Lixadeiras Industriais de Alta Performance</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="InduGrind: Lixadeiras industriais artesanais de alta performance. Robustez, precisão e qualidade para o setor metalúrgico e cuteleiro.">
+    <meta name="keywords" content="lixadeira de cinta, lixadeira industrial, ferramentas, cutelaria, metalurgia, InduGrind">
+    <meta property="og:title" content="InduGrind - Ferramentas Industriais de Precisão">
+    <meta property="og:description" content="Lixadeiras industriais de alta performance para profissionais exigentes.">
+    <meta property="og:image" content="assets/lixadeira-desenho.jpg">
+    <meta property="og:url" content="https://indugrind.github.io/indugrind/">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="assets/logotipo.png" type="image/png">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            100: '#F0FDFA',
-                            200: '#CCFBF1',
-                            300: '#99F6E4',
-                            400: '#5EEAD4',
-                            500: '#2DD4BF',
-                            600: '#14B8A6',
-                            700: '#0D9488',
-                            800: '#0F766E',
-                            900: '#134E4A',
-                        },
-                        accent: {
-                            100: '#FEFCE8',
-                            200: '#FEF9C3',
-                            300: '#FEF08A',
-                            400: '#FDE047',
-                            500: '#FACC15',
-                            600: '#EAB308',
-                            700: '#CA8A04',
-                            800: '#A16207',
-                            900: '#854D0E',
-                        },
-                    }
-                }
-            }
-        }
-    </script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
+        html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { @apply bg-gray-200 dark:bg-gray-700; }
-        ::-webkit-scrollbar-thumb { @apply bg-gray-400 dark:bg-gray-500 rounded-md; }
-        ::-webkit-scrollbar-thumb:hover { @apply bg-gray-500 dark:bg-gray-400; }
-        .modal-backdrop, .toast { transition: opacity 0.3s ease, transform 0.3s ease; }
-        [contenteditable]:focus { outline: none; @apply bg-accent-100 dark:bg-accent-900 rounded; }
-        .student-row:active { @apply bg-gray-200 dark:bg-gray-700; }
+        .gradient-bg {
+            background-color: #111827; /* gray-900 */
+        }
+        .nav-link.active { color: #facc15; }
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="antialiased bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
-    <!-- TODO: O restante do HTML igual ao seu envio anterior -->
-    <!-- ... conteúdo do sistema ... -->
-    <!-- TODO: Inclua o JS igual ao seu envio anterior -->
+<body class="gradient-bg text-gray-300 antialiased">
+
+    <!-- Cabeçalho -->
+    <header class="py-4 border-b border-gray-800 sticky top-0 bg-gray-900/80 backdrop-blur-lg z-20">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-3" data-page="home">
+                <img src="assets/logotipo.png" alt="Logotipo InduGrind" class="w-10 h-10 object-contain">
+                <h1 class="text-2xl font-bold text-white tracking-tight">
+                    <span class="text-yellow-400">INDU</span>GRIND
+                </h1>
+            </a>
+            
+            <!-- Menu Desktop -->
+            <nav id="main-nav" class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="#home" class="nav-link hover:text-yellow-400 transition-colors active" data-page="home">Início</a>
+                <a href="#produto" class="nav-link hover:text-yellow-400 transition-colors" data-page="produto">O Produto</a>
+                <a href="#equipe" class="nav-link hover:text-yellow-400 transition-colors" data-page="equipe">A Equipe</a>
+                <a href="#contato" class="nav-link hover:text-yellow-400 transition-colors" data-page="contato">Contato</a>
+            </nav>
+
+            <!-- Botão Hambúrguer -->
+            <button id="menu-btn" class="md:hidden flex flex-col space-y-1.5 z-30">
+                <span class="block w-6 h-0.5 bg-white transition-transform"></span>
+                <span class="block w-6 h-0.5 bg-white transition-opacity"></span>
+                <span class="block w-6 h-0.5 bg-white transition-transform"></span>
+            </button>
+        </div>
+        
+        <!-- Menu Mobile -->
+        <div id="menu-mobile" class="hidden md:hidden absolute top-0 left-0 w-full h-screen bg-gray-900">
+            <ul class="flex flex-col items-center justify-center h-full space-y-8 text-xl font-medium">
+                <li><a href="#home" class="nav-link-mobile hover:text-yellow-400" data-page="home">Início</a></li>
+                <li><a href="#produto" class="nav-link-mobile hover:text-yellow-400" data-page="produto">O Produto</a></li>
+                <li><a href="#equipe" class="nav-link-mobile hover:text-yellow-400" data-page="equipe">A Equipe</a></li>
+                <li><a href="#contato" class="nav-link-mobile hover:text-yellow-400" data-page="contato">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <!-- PÁGINA HOME / HERO -->
+        <section id="home" class="page-section active relative h-screen flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('assets/lixadeira-desenho.jpg');">
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+            <article class="relative z-10 text-white px-4 max-w-3xl">
+                <h1 class="text-4xl md:text-6xl font-black leading-tight">Engenharia de Precisão para Resultados Superiores</h1>
+                <p class="mt-4 text-lg md:text-2xl text-gray-300">Qualidade artesanal, robustez e performance para a sua indústria.</p>
+                <a href="#produto" data-page="produto" class="nav-link mt-8 inline-block bg-yellow-500 hover:bg-yellow-600 px-8 py-4 rounded-lg text-lg font-semibold text-gray-900 shadow-lg transition transform hover:scale-105">Conheça a Lixadeira</a>
+            </article>
+        </section>
+
+        <!-- PÁGINA O PRODUTO -->
+        <section id="produto" class="page-section py-20 bg-gray-800/50">
+            <article class="container mx-auto px-6 max-w-4xl">
+                <header class="mb-12 text-center">
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight">O Coração da Máquina: A <span class="text-yellow-400">Lixadeira de Cinta</span></h1>
+                </header>
+                <div class="space-y-12">
+                    <p class="text-center text-lg">No centro do universo InduGrind está o seu produto estrela. Projetada para máxima eficiência e durabilidade, esta ferramenta é o resultado de uma engenharia meticulosa.</p>
+                    <div class="my-8 flex justify-center">
+                        <img src="assets/lixadeira-produto.jpg" alt="Foto da Lixadeira de Cinta Industrial Indugrind" class="rounded-lg shadow-2xl">
+                    </div>
+                    <h3 class="text-2xl font-bold text-white text-center">Especificações Técnicas</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-gray-900 p-4 rounded-lg"><div class="font-bold text-yellow-400">Motor</div><div>4KW</div></div>
+                        <div class="bg-gray-900 p-4 rounded-lg"><div class="font-bold text-yellow-400">Velocidade</div><div>Até 33m/s</div></div>
+                        <div class="bg-gray-900 p-4 rounded-lg"><div class="font-bold text-yellow-400">Cinta</div><div>150x2000mm</div></div>
+                        <div class="bg-gray-900 p-4 rounded-lg"><div class="font-bold text-yellow-400">Peso</div><div>45kg</div></div>
+                        <div class="bg-gray-900 p-4 rounded-lg"><div class="font-bold text-yellow-400">Rolete</div><div>Ø200mm</div></div>
+                        <div class="bg-gray-900 p-4 rounded-lg"><div class="font-bold text-yellow-400">Ruído</div><div>&lt;76dB</div></div>
+                    </div>
+                     <h2 class="text-3xl font-bold text-white border-l-4 border-yellow-400 pl-4 pt-8">Processo de Produção</h2>
+                    <p>Uma máquina excecional só pode nascer de um processo impecável. O nosso fluxo de produção é transparente e rigorosamente controlado para garantir a máxima qualidade.</p>
+                    <div class="text-center py-6">
+                        <a href="assets/Diagrama do Processo de Produção da Lixadeira.pdf" target="_blank" class="bg-gray-700 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600 transition-colors transform hover:scale-105 inline-block">
+                            Ver Diagrama de Produção (PDF)
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- PÁGINA A EQUIPE & ESTRATÉGIA -->
+        <section id="equipe" class="page-section py-20">
+            <article class="container mx-auto px-6 max-w-4xl">
+                <header class="mb-12 text-center">
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">A Nossa <span class="text-yellow-400">Equipe</span> & Estratégia</h1>
+                </header>
+                <div class="space-y-12">
+                    <p class="text-center text-lg">O nosso maior diferencial são as pessoas por trás de cada máquina. Profissionais qualificados que garantem a excelência em cada etapa.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-gray-800/50 p-6 rounded-lg text-center"><h4 class="text-xl font-bold text-white">Alexander</h4><p class="text-yellow-400 text-sm">Dono & Estratega</p></div>
+                        <div class="bg-gray-800/50 p-6 rounded-lg text-center"><h4 class="text-xl font-bold text-white">Wilton</h4><p class="text-yellow-400 text-sm">Supervisor de Fabricação</p></div>
+                        <div class="bg-gray-800/50 p-6 rounded-lg text-center"><h4 class="text-xl font-bold text-white">Adeilton</h4><p class="text-yellow-400 text-sm">Montador Técnico</p></div>
+                        <div class="bg-gray-800/50 p-6 rounded-lg text-center"><h4 class="text-xl font-bold text-white">Genilda</h4><p class="text-yellow-400 text-sm">Suprimentos</p></div>
+                        <div class="bg-gray-800/50 p-6 rounded-lg text-center"><h4 class="text-xl font-bold text-white">Patrícia</h4><p class="text-yellow-400 text-sm">Controle de Qualidade</p></div>
+                        <div class="bg-gray-800/50 p-6 rounded-lg text-center"><h4 class="text-xl font-bold text-white">Ana & Kaylane</h4><p class="text-yellow-400 text-sm">Operações & Finanças</p></div>
+                    </div>
+                    <h2 class="text-3xl font-bold text-white border-l-4 border-yellow-400 pl-4 pt-8">Análise de Custos e Mercado</h2>
+                    <p>A nossa estratégia é fundamentada em dados sólidos. Para investidores e parceiros interessados, disponibilizamos a nossa análise completa de custos, mercado e projeções de crescimento.</p>
+                    <div class="text-center py-6">
+                        <a href="assets/Custos_produzir_divulgar_vender.pptx.pdf" target="_blank" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors transform hover:scale-105 inline-block">
+                            Ver Análise de Custos (PDF)
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- PÁGINA CONTATO -->
+        <section id="contato" class="page-section py-20 bg-gray-800/50">
+            <article class="container mx-auto px-6 max-w-4xl">
+                <header class="mb-12 text-center">
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">Fale Conosco</h1>
+                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">Tem alguma dúvida ou quer um orçamento? Estamos à sua disposição.</p>
+                </header>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <form action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST" class="space-y-4">
+                        <div><label for="name" class="block text-sm font-semibold mb-2 text-gray-400">Nome</label><input type="text" id="name" name="name" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"></div>
+                        <div><label for="email" class="block text-sm font-semibold mb-2 text-gray-400">Email</label><input type="email" id="email" name="email" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"></div>
+                        <div><label for="message" class="block text-sm font-semibold mb-2 text-gray-400">Mensagem</label><textarea id="message" name="message" rows="5" required class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea></div>
+                        <div class="text-left"><button type="submit" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-lg hover:bg-yellow-600 transition-colors transform hover:scale-105">Enviar Mensagem</button></div>
+                    </form>
+                    <div class="space-y-4 text-lg">
+                        <p><strong>Telefone:</strong> <a href="tel:+5511999999999" class="hover:text-yellow-400">(11) 99999-9999</a></p>
+                        <p><strong>Email:</strong> <a href="mailto:contato@indugrind.com" class="hover:text-yellow-400">contato@indugrind.com</a></p>
+                        <p><strong>Endereço:</strong> Rua Exemplo, 123 - São Paulo/SP</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p>&copy; 2025 InduGrind. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">A construir o futuro da indústria brasileira.</p>
+        </div>
+    </footer>
+
+    <!-- Botão WhatsApp flutuante -->
+    <a href="https://wa.me/5511999999999" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition transform hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link, a[data-page]');
+            const sections = document.querySelectorAll('.page-section');
+            const mainNav = document.getElementById('main-nav');
+            const menuBtn = document.getElementById('menu-btn');
+            const menuMobile = document.getElementById('menu-mobile');
+            const mobileLinks = document.querySelectorAll('.nav-link-mobile');
+
+            function showPage(pageId) {
+                sections.forEach(section => section.classList.remove('active'));
+                const activeSection = document.getElementById(pageId);
+                if (activeSection) activeSection.classList.add('active');
+
+                const navLinksInNav = mainNav.querySelectorAll('.nav-link');
+                navLinksInNav.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-page') === pageId) link.classList.add('active');
+                });
+                window.scrollTo(0, 0);
+            }
+
+            menuBtn.addEventListener('click', () => {
+                menuMobile.classList.toggle('hidden');
+                menuBtn.classList.toggle('open');
+            });
+
+            const allLinks = document.querySelectorAll('a[data-page]');
+            allLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                    history.pushState(null, '', `#${pageId}`);
+                    if (!menuMobile.classList.contains('hidden')) {
+                        menuMobile.classList.add('hidden');
+                        menuBtn.classList.remove('open');
+                    }
+                });
+            });
+
+            const initialPage = window.location.hash.substring(1) || 'home';
+            showPage(initialPage);
+        });
+    </script>
 </body>
 </html>
